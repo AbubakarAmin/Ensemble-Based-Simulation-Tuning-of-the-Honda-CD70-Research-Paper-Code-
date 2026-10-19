@@ -1,0 +1,14 @@
+# Calibration targets and acceptance filter (LOCKED FILE for the agent).
+# Targets come from spec sheet v11 section 8 (values unchanged since v10) (cal_1, cal_2, cal_3). Filters are plausibility limits.
+conditions: {ron: 87, t_amb_c: 35, alt_m: 0}
+power_hp_7500:      {target: 5.05, rel_tol: 0.05}   # cal_1, MEDIUM
+torque_nm_5500:     {target: 5.0,  rel_tol: 0.10}   # cal_2, MEDIUM
+cranking_bar:       {target: 12.7, rel_tol: 0.10}   # cal_3, WSM; motoring, throttle open, gauge pressure, at the nuisance speed u_crank_rpm (300-1000; WSM says 1000, true test speed unknown)
+top_speed_true_kmh: {low: 80, high: 90}   # cal_4, real-world top speed of a stock CD70 (80-90 km/h)
+bsfc_gkwh_7500:     {low: 300, high: 450}           # WOT
+ve_7500:            {low: 0.60, high: 0.98}
+theta_pmax_atdc_5500: {low: 10, high: 22}           # degrees after firing TDC
+pmax_bar:           {high: 60}                      # WOT at 5500 and 7500
+power_target_sensitivity_hp: 4.5                    # repeat the calibration with this power target (sensitivity only)
+min_accepted: 100
+draws_per_scenario: 32768

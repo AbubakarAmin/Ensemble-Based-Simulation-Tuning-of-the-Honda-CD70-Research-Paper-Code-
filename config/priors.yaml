@@ -1,0 +1,60 @@
+# Priors for the 38 uncertain inputs and bounds for the 8 design variables.
+# LOCKED FILE for the agent. The meaning of every name is defined in src/cd70/params.py.
+# dist: uniform | loguniform | discrete (values listed)
+# group: CAL = unknown model parameter calibrated against the published numbers
+#        SPEC = uncertain value of the real engine (tag shows the spec sheet status)
+uncertain:
+  - {name: burn_dur_deg,        low: 45,    high: 75,    dist: uniform,    nominal: 60,    group: CAL,  tag: CAL}
+  - {name: wiebe_m,             low: 1.5,   high: 2.5,   dist: uniform,    nominal: 2.0,   group: CAL,  tag: CAL}
+  - {name: spark_delay_deg,     low: 6,     high: 16,    dist: uniform,    nominal: 10,    group: CAL,  tag: CAL}
+  - {name: eta_comb,            low: 0.92,  high: 0.98,  dist: uniform,    nominal: 0.95,  group: CAL,  tag: CAL}
+  - {name: cd_scale,            low: 0.55,  high: 0.80,  dist: uniform,    nominal: 0.70,  group: CAL,  tag: CAL}
+  - {name: lambda_wot,          low: 0.82,  high: 0.98,  dist: uniform,    nominal: 0.90,  group: CAL,  tag: CAL}
+  - {name: lambda_cruise,       low: 0.90,  high: 1.10,  dist: uniform,    nominal: 1.00,  group: CAL,  tag: CAL}
+  - {name: fmep_scale,          low: 0.8,   high: 1.3,   dist: uniform,    nominal: 1.0,   group: CAL,  tag: CAL}
+  - {name: t_wall_offset_k,     low: -50,   high: 50,    dist: uniform,    nominal: 0,     group: CAL,  tag: CAL}
+  - {name: v_intake_cm3,        low: 60,    high: 150,   dist: uniform,    nominal: 100,   group: CAL,  tag: CAL}
+  - {name: muffler_area_mm2,    low: 60,    high: 140,   dist: uniform,    nominal: 100,   group: CAL,  tag: CAL}
+  - {name: leak_area_mm2,       low: 0.03,  high: 0.6,   dist: loguniform, nominal: 0.15,  group: CAL,  tag: CAL}
+  - {name: charge_heat_k,       low: 15,    high: 50,    dist: uniform,    nominal: 30,    group: CAL,  tag: CAL}
+  - {name: knock_margin_base,   low: 0.6,   high: 0.95,  dist: uniform,    nominal: 0.85,  group: CAL,  tag: CAL}
+  - {name: valve_lift_mm,       low: 6.0,   high: 7.0,   dist: uniform,    nominal: 6.5,   group: SPEC, tag: ASSUMED}
+  - {name: io_off,              low: -2,    high: 2,     dist: uniform,    nominal: 0,     group: SPEC, tag: WSM}
+  - {name: ic_off,              low: -2,    high: 2,     dist: uniform,    nominal: 0,     group: SPEC, tag: WSM}
+  - {name: eo_off,              low: -2,    high: 2,     dist: uniform,    nominal: 0,     group: SPEC, tag: WSM}
+  - {name: ec_off,              low: -2,    high: 2,     dist: uniform,    nominal: 0,     group: SPEC, tag: WSM}
+  - {name: valve_clearance_mm,  low: 0.08,  high: 0.10,  dist: uniform,    nominal: 0.09,  group: SPEC, tag: WSM}
+  - {name: conrod_mm,           low: 90,    high: 92,    dist: uniform,    nominal: 91,    group: SPEC, tag: MEDIUM}
+  - {name: head_in_mm,          low: 22.5,  high: 27.5,  dist: uniform,    nominal: 25.0,  group: SPEC, tag: PROXY}
+  - {name: head_ex_mm,          low: 19.7,  high: 24.1,  dist: uniform,    nominal: 21.9,  group: SPEC, tag: PROXY}
+  - {name: venturi_mm,          values: [16.5, 18.0],    dist: discrete,   nominal: 18.0,  group: SPEC, tag: OPEN}
+  - {name: main_jet_true,       low: 72,    high: 78,    dist: uniform,    nominal: 78,    group: SPEC, tag: MEDIUM}
+  - {name: slow_jet_true,       values: [35, 38],        dist: discrete,   nominal: 38,    group: SPEC, tag: PROXY/OPEN}
+  - {name: ign_low_true,        low: 15,    high: 25,    dist: uniform,    nominal: 20,    group: SPEC, tag: WSM/OPEN}
+  - {name: ign_high_true,       low: 33,    high: 37,    dist: uniform,    nominal: 35,    group: SPEC, tag: WSM}
+  - {name: ign_above_true,      low: 32,    high: 38,    dist: uniform,    nominal: 35,    group: SPEC, tag: ASSUMED}
+  - {name: gear_scale,          low: 0.994, high: 1.006, dist: uniform,    nominal: 1.0,   group: SPEC, tag: WSM}
+  - {name: primary,             low: 3.702, high: 3.742, dist: uniform,    nominal: 3.722, group: SPEC, tag: WSM}
+  - {name: rolling_radius_m,    low: 0.26,  high: 0.28,  dist: uniform,    nominal: 0.279, group: SPEC, tag: DERIVED}
+  - {name: cda_m2,              low: 0.25,  high: 0.65,  dist: uniform,    nominal: 0.45,  group: SPEC, tag: ASSUMED}
+  - {name: crr,                 low: 0.014, high: 0.030, dist: uniform,    nominal: 0.020, group: SPEC, tag: ASSUMED}
+  - {name: drive_eff,           low: 0.80,  high: 0.92,  dist: uniform,    nominal: 0.86,  group: SPEC, tag: ASSUMED}
+  - {name: mass_kg,             low: 140,   high: 170,   dist: uniform,    nominal: 155,   group: SPEC, tag: ASSUMED}
+  - {name: speedo_overread,     low: 0.0,   high: 0.10,  dist: uniform,    nominal: 0.05,  group: CAL,  tag: ASSUMED}
+  - {name: crank_rpm,           low: 300,   high: 1000,  dist: uniform,    nominal: 600,   group: CAL,  tag: WSM-states-1000}
+
+design:
+  - {name: cr,               low: 8.5,  high: 10.5, baseline: 9.3, integer: false, hardware: B}
+  - {name: d_ign_low_deg,    low: -8,   high: 8,    baseline: 0,   integer: false, hardware: A}
+  - {name: d_ign_high_deg,   low: -8,   high: 8,    baseline: 0,   integer: false, hardware: A}
+  - {name: main_jet_delta,   low: -8,   high: 4,    baseline: 0,   integer: true,  hardware: A}
+  - {name: int_shift_deg,    low: -12,  high: 12,   baseline: 0,   integer: false, hardware: C}
+  - {name: exh_shift_deg,    low: -12,  high: 12,   baseline: 0,   integer: false, hardware: C}
+  - {name: cam_dur_scale,    low: 0.90, high: 1.15, baseline: 1.0, integer: false, hardware: C}
+  - {name: int_valve_scale,  low: 0.90, high: 1.10, baseline: 1.0, integer: false, hardware: C}
+
+# Hardware classes: A = jet and ignition only, B = A plus compression ratio, C = everything.
+hardware_classes:
+  A: [d_ign_low_deg, d_ign_high_deg, main_jet_delta]
+  B: [d_ign_low_deg, d_ign_high_deg, main_jet_delta, cr]
+  C: [cr, d_ign_low_deg, d_ign_high_deg, main_jet_delta, int_shift_deg, exh_shift_deg, cam_dur_scale, int_valve_scale]

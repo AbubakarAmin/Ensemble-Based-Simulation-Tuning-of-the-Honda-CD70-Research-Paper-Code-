@@ -1,0 +1,21 @@
+### 3.7 Objectives, constraints and the paired design
+
+*Analysis amendment.* The study protocol was first written with steady-cruise fuel use as the fuel objective. The objective was changed to city-cycle fuel use on 15 October 2026, before any optimisation result had been generated, because published and owner figures are city or mixed figures. The claim levels and thresholds of Section 3.10 were not changed. The record of the change is kept in the study decision log.
+
+Two objectives are used: the mean full-throttle brake torque over twelve speeds between 2,000 and 7,500 rpm (to be maximised) and the city-cycle fuel use (litres per 100 km, to be minimised), a time-weighted mix of idle, low-speed cruise phases in second to fourth gear and a stop-and-go acceleration term (Section 3.2). Steady-cruise fuel use at 30, 40 and 50 km/h is reported as a diagnostic and is not an objective. A design is feasible if the knock index is at most 0.95, peak cylinder pressure is at most 60 bar, and the design rules and plausibility checks of Section 3.3 pass. All comparisons are paired: a design and the baseline are evaluated on the same calibrated engine, and the gain on that engine is expressed as a percentage of the baseline value on that engine, so that engine-to-engine differences do not masquerade as design effects.
+
+### 3.8 Screening and variance-based sensitivity analysis
+
+On the nominal engine, each of the eight tuning variables is first moved one at a time to its lower and upper bound (OFAT). Morris elementary effects [R13] (30 trajectories, four levels) then screen for influence and for interaction or non-linearity (the spread of the effects), and Sobol first-order and total-order indices [R14, R15] (base sample 256, second-order terms not computed) apportion the variance of each objective among the variables. A total index that is much larger than the first-order index indicates interaction with other variables. The sensitivity analyses use the nominal engine; the influence of the unknown engine properties is analysed separately on the ensemble (value of information, Section 3.10).
+
+### 3.9 Optimisation methods
+
+On the nominal engine, NSGA-II [R5, R19], a tree-structured Parzen estimator [R6] and random search (same budget) are run with several seeds in each hardware class; their feasible Pareto fronts are compared by hypervolume. A robust variant of NSGA-II evaluates each candidate on a subsample of calibrated engines and optimises the mean paired gain, with a constraint on the 80th percentile of the knock index across engines and a limit on the share of engines that break a rule. Three named designs are then picked from the pooled robust front: economy (least fuel use without losing torque), power (most torque without extra fuel use) and balanced (the knee of the front).
+
+### 3.10 Claim levels, scenarios and value of information
+
+Each picked design is re-evaluated on up to 300 calibrated engines, and the median paired gain is reported with a 95% bootstrap interval. To prevent over-interpretation we pre-specified four claim levels (Appendix B): CLAIM (lower interval bound above a material threshold of 0.5%, at least 95% of engines improve, design feasible on at least 90% of engines, and the same sign under both valve-timing readings), CONDITIONAL, INDICATIVE and NOT SUPPORTED. The wording of every result in this paper follows its level: only CLAIM results are described as improvements. Robustness to operating conditions is assessed on a grid of fuel octane (RON 87 and 92), ambient temperature (15, 30 and 45 C) and altitude (0 and 1,500 m), and the unknown engine properties that most influence the size of the gain are ranked by random-forest permutation importance [R17] and Spearman correlation (value of information). 
+
+### 3.11 Reproducibility
+
+All random numbers derive from seeds recorded in the configuration, all package versions are pinned, and the whole study is executed by a scripted pipeline of tasks with machine-checked completion criteria, so that every table and figure of this paper is regenerated from the stored results by a single script. The model code and the configuration are hash-locked during the study, and every number in the text is verified against the result files before the manuscript is produced.

@@ -1,0 +1,10 @@
+# All random seeds live here. Never type a seed inside code.
+calibration_sobol: 20261010
+morris: 20261011
+sobol_design: 20261012
+ofat: 20261013
+optimiser_seeds: [1, 2, 3, 4, 5]
+random_search: 20261014
+robustness_subsample: 20261015
+voi_forest: 20261016
+reproduce_small: 20261017

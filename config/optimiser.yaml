@@ -1,0 +1,10 @@
+# Fuel objective used by the optimiser, sensitivity analysis, robustness check, figures and paper.
+# LOCKED FILE for the agent. Set in v15 to the city cycle, because published and owner figures are city or mixed figures.
+#
+# - f2_city_l100km: city-cycle fuel use (src/cd70/cycle.py, time shares in config/validation.yaml). OBJECTIVE.
+# - f2_cruise_l100km: steady cruise at 30/40/50 km/h, 4th gear. Still computed and stored as a DIAGNOSTIC; not the objective.
+#
+# The calibration does NOT use fuel, so fuel validation (T-035) stays a comparison against figures the model was not calibrated to.
+# But the optimiser now minimises the model's own city estimate, so city comparisons are not independent of the design choice.
+fuel_metric: f2_city_l100km
+fuel_label: city fuel use

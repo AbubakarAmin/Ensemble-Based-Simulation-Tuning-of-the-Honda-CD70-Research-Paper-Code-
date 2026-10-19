@@ -1,0 +1,34 @@
+# v14 validation settings. LOCKED FILE for the agent.
+# Written BEFORE any v14 validation result was seen. Changing a value here after seeing results is not allowed;
+# add a DECISIONS.md line if a change is truly needed, and report both results.
+# Nothing here changes calibration, the optimiser, or the locked evaluation.
+
+city_cycle:
+  # Indicative city riding. Time shares are ASSUMED. Braking is not modelled, and the stop-and-go term below is
+  # a simple energy estimate, so the city figure is still likely optimistic (see LIMITATIONS).
+  phases:
+    - {kind: idle,   time_share: 0.20}
+    - {kind: cruise, speed_kmh: 20, gear: 2, time_share: 0.15}
+    - {kind: cruise, speed_kmh: 30, gear: 3, time_share: 0.25}
+    - {kind: cruise, speed_kmh: 40, gear: 4, time_share: 0.25}
+    - {kind: cruise, speed_kmh: 50, gear: 4, time_share: 0.15}
+  idle_share_sensitivity: [0.10, 0.30]   # idle shares used for the bounds (other phases rescaled pro rata)
+  # Stop-and-go acceleration added on top of the cruise phases (v14). All ASSUMED, reported as a separate term.
+  accel:
+    events_per_km: 2.0        # ASSUMED stops per km in city traffic
+    to_speed_kmh: 30.0        # ASSUMED speed reached after each stop
+    efficiency: 0.20          # ASSUMED fuel-to-kinetic-energy efficiency during acceleration
+    rot_mass_factor: 1.10     # same as the locked vehicle model (rotating inertia)
+  lhv_mj_per_kg: 43.0         # gasoline lower heating value (physical constant, typical value)
+
+idle:
+  rpm: 1500            # idle speed from the official specification
+  throttle: 0.05       # ASSUMED throttle opening at idle
+
+runin:
+  fmep_factor: 1.15    # ASSUMED: friction multiplier for a new bike (first 1,500 km)
+
+agreement:
+  tolerance: 0.20      # AGREE if the model median is within [low*(1-0.2), high*(1+0.2)]
+
+gearing_note: "Diagnostic only. The rated speed of 7,500 rpm should correspond to about 69 km/h in 4th gear with the sheet gearing."

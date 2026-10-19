@@ -1,0 +1,9 @@
+# Operating scenarios. The design case is the first one (RON 87, 35 C, sea level).
+design_case: {ron: 87, t_amb_c: 35, alt_m: 0}
+grid:
+  ron: [87, 92]
+  t_amb_c: [15, 30, 45]
+  alt_m: [0, 1500]
+timing_scenarios:
+  A: "valve timing as printed in the workshop manual (0/20/20/0), durations at zero lift"
+  B: "workshop timing quoted at a reference lift: each flank 20 deg longer (20/40/40/20)"
